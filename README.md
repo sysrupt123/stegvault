@@ -16,7 +16,7 @@ I built this project while exploring cybersecurity and encryption.I wanted to tr
 
 ## Run it
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/sysrupt123/stegvault.git
 cd stegvault
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
