@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StegVault</title>
+<style>
+  body { font-family: system-ui, sans-serif; background:#0f172a; color:#e2e8f0;
+         max-width:900px; margin:0 auto; padding:24px; }
+  h1 { margin-bottom:4px; }
+  .sub { color:#94a3b8; margin-bottom:24px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:700px){ .grid{ grid-template-columns:1fr; } }
+  .card { background:#1e293b; border-radius:10px; padding:18px; }
+  label { display:block; margin:12px 0 4px; font-size:14px; color:#cbd5e1; }
+  input, textarea { width:100%; box-sizing:border-box; padding:8px; border-radius:6px;
+         border:1px solid #475569; background:#0f172a; color:#e2e8f0; }
+  button { margin-top:14px; padding:10px 16px; border:0; border-radius:6px;
+         background:#38bdf8; color:#0f172a; font-weight:600; cursor:pointer; }
+  .error { background:#7f1d1d; padding:10px; border-radius:6px; margin-bottom:16px; }
+  .result { background:#14532d; padding:10px; border-radius:6px; margin-bottom:16px;
+         white-space:pre-wrap; word-break:break-word; }
+  .note { font-size:12px; color:#94a3b8; margin-top:20px; }
+</style>
+</head>
+<body>
+  <h1>StegVault</h1>
+  <div class="sub">Encrypt a message and hide it inside an image. Everything runs on your machine.</div>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  {% if result %}<div class="result"><b>Hidden message:</b>
+{{ result }}</div>{% endif %}
+
+  <div class="grid">
+    <div class="card">
+      <h2>Hide a message</h2>
+      <form action="/hide" method="post" enctype="multipart/form-data">
+        <label>Cover image (PNG or JPG)</label>
+        <input type="file" name="image" accept="image/png,image/jpeg" required>
+        <label>Secret message</label>
+        <textarea name="message" rows="4" required></textarea>
+        <label>Password</label>
+        <input type="password" name="password" required>
+        <button type="submit">Hide and download</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Reveal a message</h2>
+      <form action="/reveal" method="post" enctype="multipart/form-data">
+        <label>Image with hidden message (PNG)</label>
+        <input type="file" name="image" accept="image/png" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
+        <button type="submit">Reveal</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="note">Send the output as a file, not through apps that recompress images
+  (WhatsApp photos, Instagram), or the hidden data will be destroyed.</div>
+</body>
+</html>
