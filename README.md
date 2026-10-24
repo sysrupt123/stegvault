@@ -41,5 +41,7 @@ Open http://127.0.0.1:5000. Try `samples/hidden.png` with password `demo1234`.
 Python, Flask, Pillow, cryptography. Written with AI assistance (Claude), which I
 used to learn and build; I reviewed and understand the code.
 
+![StegVault screenshot](demo.png)
+
 ## License
 MIT
